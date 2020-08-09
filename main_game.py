@@ -1,5 +1,15 @@
 import random
 
+def get_colored_string(marker):
+    if marker == "O":
+        # Blue.
+        return "\x1b[34m{}\x1b[0m".format(marker)
+    elif marker == "X":
+        # Red.
+        return "\x1b[31m{}\x1b[0m".format(marker)
+    else:
+        # No color.
+        return marker
 
 def assign_marker():
     """
@@ -15,7 +25,6 @@ def assign_marker():
     else:
         print("Player 1 is O and Player 2 is X.")
     return user_marker
-
 
 def is_player1_first():
     """
@@ -42,6 +51,7 @@ def print_board(input_nums):
     """
     Prints the Tic-Tac-Toe board.
     """
+    colored_marks = [get_colored_string(m) for m in input_nums]
     print("""
                   ┃           ┃
             {6}     ┃     {7}     ┃    {8}   
@@ -54,9 +64,9 @@ def print_board(input_nums):
                   ┃           ┃
             {0}     ┃     {1}     ┃    {2}    
                   ┃           ┃
-            """.format(input_nums[0], input_nums[1], input_nums[2],
-                       input_nums[3], input_nums[4], input_nums[5],
-                       input_nums[6], input_nums[7], input_nums[8]))
+            """.format(colored_marks[0], colored_marks[1], colored_marks[2],
+                       colored_marks[3], colored_marks[4], colored_marks[5],
+                       colored_marks[6], colored_marks[7], colored_marks[8]))
 
 
 def get_player_choice(input_nums, marker):
@@ -90,7 +100,6 @@ def has_won(input_nums, marker):
     """
     Checks if a player has won. Also checks for a tie.
     """
-
     condition = (
         input_nums[0] == input_nums[1] == input_nums[2] == marker
         or input_nums[3] == input_nums[4] == input_nums[5] == marker
@@ -147,6 +156,7 @@ def play_game():
                 has_a_player_won = True
                 break
 
+    print_board(input_nums)
     print("Thank you for playing!")
 
 
