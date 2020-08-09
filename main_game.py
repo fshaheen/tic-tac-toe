@@ -143,7 +143,6 @@ def play_game():
 
             position = get_player_choice(input_nums, second_player)
             input_nums[position-1] = second_player
-            print_board(input_nums)
             if has_won(input_nums, second_player):
                 has_a_player_won = True
                 break
